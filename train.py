@@ -74,16 +74,16 @@ def main():
 
     if args.pre:
         if os.path.isfile(args.pre):
-            print("=> loading checkpoint '{}'".format(args.pre))
+            print(("=> loading checkpoint '{}'".format(args.pre)))
             checkpoint = torch.load(args.pre)
             args.start_epoch = checkpoint['epoch']
             best_prec1 = checkpoint['best_prec1']
             model.load_state_dict(checkpoint['state_dict'])
             optimizer.load_state_dict(checkpoint['optimizer'])
-            print("=> loaded checkpoint '{}' (epoch {})"
-                  .format(args.pre, checkpoint['epoch']))
+            print(("=> loaded checkpoint '{}' (epoch {})"
+                  .format(args.pre, checkpoint['epoch'])))
         else:
-            print("=> no checkpoint found at '{}'".format(args.pre))
+            print(("=> no checkpoint found at '{}'".format(args.pre)))
             
     for epoch in range(args.start_epoch, args.epochs):
         
@@ -94,8 +94,8 @@ def main():
         
         is_best = prec1 < best_prec1
         best_prec1 = min(prec1, best_prec1)
-        print(' * best MAE {mae:.3f} '
-              .format(mae=best_prec1))
+        print((' * best MAE {mae:.3f} '
+              .format(mae=best_prec1)))
         save_checkpoint({
             'epoch': epoch + 1,
             'arch': args.pre,
@@ -123,7 +123,7 @@ def train(train_list, model, criterion, optimizer, epoch):
                        batch_size=args.batch_size,
                        num_workers=args.workers),
         batch_size=args.batch_size)
-    print('epoch %d, processed %d samples, lr %.10f' % (epoch, epoch * len(train_loader.dataset), args.lr))
+    print(('epoch %d, processed %d samples, lr %.10f' % (epoch, epoch * len(train_loader.dataset), args.lr)))
     
     model.train()
     end = time.time()
@@ -153,13 +153,13 @@ def train(train_list, model, criterion, optimizer, epoch):
         end = time.time()
         
         if i % args.print_freq == 0:
-            print('Epoch: [{0}][{1}/{2}]\t'
+            print(('Epoch: [{0}][{1}/{2}]\t'
                   'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
                   'Data {data_time.val:.3f} ({data_time.avg:.3f})\t'
                   'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
                   .format(
                    epoch, i, len(train_loader), batch_time=batch_time,
-                   data_time=data_time, loss=losses))
+                   data_time=data_time, loss=losses)))
     
 def validate(val_list, model, criterion):
     print ('begin test')
@@ -184,8 +184,8 @@ def validate(val_list, model, criterion):
         mae += abs(output.data.sum()-target.sum().type(torch.FloatTensor).cuda())
         
     mae = mae/len(test_loader)    
-    print(' * MAE {mae:.3f} '
-              .format(mae=mae))
+    print((' * MAE {mae:.3f} '
+              .format(mae=mae)))
 
     return mae    
         
