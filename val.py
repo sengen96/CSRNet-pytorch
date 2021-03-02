@@ -19,7 +19,7 @@ from matplotlib import cm as CM
 from image import *
 from model import CSRNet
 import torch
-get_ipython().run_line_magic('matplotlib', 'inline')
+# get_ipython().run_line_magic('matplotlib', 'inline')
 
 
 # In[10]:
