@@ -35,7 +35,7 @@ transform=transforms.Compose([
 # In[3]:
 
 
-root = '/home/leeyh/Downloads/Shanghai/'
+root = './ShanghaiTech_Crowd_Counting_Dataset'
 
 
 # In[4]:
